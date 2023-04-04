@@ -6,7 +6,7 @@ public class Student {
 
     private String ID;
     private String name;
-    private String money;   
+    private static String money;   
     private Scanner reader;
     private File file;
     
@@ -16,22 +16,22 @@ public class Student {
         setFile();
     }
     
-  // initalize file depending on which student  
+    //initalize file depending on which student  
     public void setFile()
     {
-  // hard coded IDs
+  //hard coded IDs
 
-  // Brian       
+        //Brian       
         if(ID.equals("123456"))
         {
             file = new File("Brian.txt");
         }
-   //Aamnah     
+        //Aamnah     
         else if(ID.equals("567890"))
         {
             file = new File("Aamnah.txt");
         }
-   //Phill     
+        //Phill     
         else if(ID.equals("654321"))
         {
             file = new File("Phill.txt");
@@ -42,7 +42,7 @@ public class Student {
         }
     }
 
-// initalize student
+    //initalize student
     public void setStudent()
     {
         try 
@@ -53,7 +53,7 @@ public class Student {
         {
             e.printStackTrace();
         }
-// set variables from file
+        //set variables from file
         if(ID.equals(reader.nextLine()))
          {
             name = reader.nextLine();
@@ -65,7 +65,7 @@ public class Student {
     {
         return name;
     }
-    public String getMoney() 
+    public static String getMoney() 
     {
         return money;
     }   
