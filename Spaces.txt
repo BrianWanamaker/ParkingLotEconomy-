@@ -1,0 +1,5 @@
+$10 --> A  B  C  D  E
+$5  --> F  G  H  I  J
+$1  --> K  L  M  N  O
+-$1 --> P  Q  R  S  T 
+-$5 --> U  V  W  X  Y  Z

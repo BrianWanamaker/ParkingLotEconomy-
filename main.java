@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class main {
@@ -35,16 +38,19 @@ public class main {
         }
 
         //Show choice
-        switch (input) {
+        switch (input) { 
+            //Show the users reservations
             case 1: 
-                System.out.println("Reservations"); 
+                System.out.println("Reservations:"); 
+                Student.showReservations(); 
                 break;
             //Displays the users funds
             case 2: 
                 System.out.println("Funds: " + Student.getMoney());
                 break;
             case 3: 
-                System.out.println("New Reservation");
+                System.out.println("New Reservation"); 
+                makeReservation();
                 break;
             //Logs user out and closes the application
             case 4: 
@@ -64,5 +70,31 @@ public class main {
         System.out.println("2. Show Funds");
         System.out.println("3. Make Reservations");
         System.out.println("4. Log Out\n"); 
+    } 
+
+    //Makes a reservation
+    public static void makeReservation() {
+        System.out.println("Please Select a Space by Entering its Letter");
+        File spaces = new File("Spaces.txt"); 
+        //Display all of the spaces
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("Spaces.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                line = reader.readLine();
+            }
+            reader.close();
+        }
+        catch (Exception e) { 
+            e.printStackTrace();
+        }
+
+        //Take space selection and add it to the users reservation
+        Scanner input = new Scanner(System.in);
+        String space = input.nextLine();
+        space.toUpperCase();
+        Student.addReservation(space); 
+        input.close();
     }
 }

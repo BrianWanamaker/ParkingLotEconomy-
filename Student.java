@@ -1,5 +1,10 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Student {
@@ -8,7 +13,7 @@ public class Student {
     private String name;
     private static String money;   
     private Scanner reader;
-    private File file;
+    private static File file;
     
     public Student(String ID)
     {
@@ -76,5 +81,41 @@ public class Student {
     public String toString()
     {
         return ID + "\n" + name + "\n" + "Balance: " + money;
+    } 
+
+    //Adds a reservation to the users file
+    public static void addReservation(String spaceLetter) {
+        try {
+            FileWriter writer = new FileWriter(file, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.write("Space: " + spaceLetter + " is Reserved.");
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+    } 
+
+    //Displays users reservations
+    public static void showReservations() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            boolean reservations = false;
+            while (line != null) {
+                if(reservations == true) {
+                    System.out.println(line);
+                }
+                if(line.equals("Reservations:")) {
+                    reservations = true;
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+        }
+        catch (Exception e) { 
+            e.printStackTrace();
+        }
     }
+
 }
