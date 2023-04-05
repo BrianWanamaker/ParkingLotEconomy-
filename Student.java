@@ -74,6 +74,11 @@ public class Student {
     {
         return money;
     }   
+    //Sets money on the users account 
+    public static void setMoney(int balance) {
+        money = Integer.toString(balance); 
+        System.out.println(money);
+    }
     public File getFile() 
     {
         return file;
