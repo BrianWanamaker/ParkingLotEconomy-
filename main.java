@@ -47,10 +47,11 @@ public class main {
             //Displays the users funds
             case 2: 
                 System.out.println("Funds: " + Student.getMoney());
+                displayMenu();
                 break;
             case 3: 
                 System.out.println("New Reservation"); 
-                makeReservation();
+                makeReservation(student);
                 break;
             //Logs user out and closes the application
             case 4: 
@@ -73,7 +74,7 @@ public class main {
     } 
 
     //Makes a reservation
-    public static void makeReservation() {
+    public static void makeReservation(Student student) {
         System.out.println("Please Select a Space by Entering its Letter");
         File spaces = new File("Spaces.txt"); 
         //Display all of the spaces
@@ -92,9 +93,41 @@ public class main {
 
         //Take space selection and add it to the users reservation
         Scanner input = new Scanner(System.in);
+        int cost = 0; 
+        int funds = Integer.parseInt(student.getMoney());
         String space = input.nextLine();
-        space.toUpperCase();
-        Student.addReservation(space); 
+        space = space.toUpperCase(); 
+        System.out.println(space);
+        //Set the cost depending on the space selected
+        if(space.equals("A") || space.equals("B") || space.equals("C") || space.equals("D") || space.equals("E")) {
+            cost = 10;
+        } 
+        else if (space.equals("F") || space.equals("G") || space.equals("H") || space.equals("I") || space.equals("J")) {
+            cost = 5;
+        } 
+        else if (space.equals("K") || space.equals("L") || space.equals("M") || space.equals("N") || space.equals("O")) {
+            cost = 1;
+        } 
+        else if (space.equals("P") || space.equals("Q") || space.equals("R") || space.equals("S") || space.equals("T")) {
+            cost = -1;
+        }
+        else if (space.equals("U") || space.equals("V") || space.equals("W") || space.equals("X") || space.equals("Y") || space.equals("Z")) {
+            cost = -5;
+        } 
+        else {
+            System.out.println("Invalid Selection");
+            makeReservation(student);
+        }
+        //If the user does not have enough money make them make anouther selection 
+        if(funds < cost) {
+            System.out.println("Insuffient Funds");
+            makeReservation(student);
+        } 
+        //Otherwise add the reservation and decrease the users money
+        else {
+            Student.addReservation(space);
+            Student.setMoney(funds-cost);
+        } 
         input.close();
     }
 }
