@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Student {
@@ -75,9 +76,28 @@ public class Student {
         return money;
     }   
     //Sets money on the users account 
-    public static void setMoney(int balance) {
-        money = Integer.toString(balance); 
-        System.out.println(money);
+    public static void setMoney(int balance) { 
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            PrintWriter writer = new PrintWriter("temp.txt", "UTF-8");
+            while (line != null) {
+                if(line.equals(money)) {
+                    writer.println(balance);
+                }
+                else {
+                    writer.println(line);
+                }
+                line = reader.readLine();
+            }
+            writer.close();
+            reader.close();
+        }
+        catch (Exception e) { 
+            e.printStackTrace();
+        } 
+        replaceFile();
+        money = Integer.toString(balance);
     }
     public File getFile() 
     {
@@ -116,6 +136,24 @@ public class Student {
                 }
                 line = reader.readLine();
             }
+            reader.close();
+        }
+        catch (Exception e) { 
+            e.printStackTrace();
+        }
+    } 
+
+    //Replace the users file with the temp file
+    public static void replaceFile() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("temp.txt"));
+            String line = reader.readLine();
+            PrintWriter writer = new PrintWriter(file, "UTF-8");
+            while (line != null) {
+                writer.println(line);
+                line = reader.readLine();
+            }
+            writer.close();
             reader.close();
         }
         catch (Exception e) { 
