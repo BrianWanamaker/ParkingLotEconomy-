@@ -26,38 +26,44 @@ public class main {
         //initalize student   
         student.setStudent();
 
-        //Display menu and select an option 
-        displayMenu();
-        int input = in.nextInt();
-        
-        //If the input is not an option return an error and request a new response
-        while(input < 1 || input > 4) {
-            System.out.println("\nInput Error. Enter a Valid Integer!");
-            displayMenu();
-            input = in.nextInt();
-        }
+        //boolean var to loop back to login
+        boolean rerun = true;
 
-        //Show choice
-        switch (input) { 
-            //Show the users reservations
-            case 1: 
-                System.out.println("Reservations:"); 
-                Student.showReservations(); 
-                break;
-            //Displays the users funds
-            case 2: 
-                System.out.println("Funds: " + Student.getMoney());
+        while(rerun == true)        
+        {
+            //Display menu and select an option 
+            displayMenu();
+            int input = in.nextInt();
+            
+            //If the input is not an option return an error and request a new response
+            while(input < 1 || input > 4) {
+                System.out.println("\nInput Error. Enter a Valid Integer!");
                 displayMenu();
-                break;
-            case 3: 
-                System.out.println("New Reservation"); 
-                makeReservation(student);
-                break;
-            //Logs user out and closes the application
-            case 4: 
-                System.out.println("You Have Been Logged Out!");
-                System.exit(0);
-                break;
+                input = in.nextInt();
+            }
+
+            //Show choice
+            switch (input) { 
+                //Show the users reservations
+                case 1: 
+                    System.out.println("Reservations:"); 
+                    Student.showReservations(); 
+                    break;
+                //Displays the users funds
+                case 2: 
+                    System.out.println("Funds: " + Student.getMoney());
+                    break;
+                case 3: 
+                    System.out.println("New Reservation"); 
+                    makeReservation(student);
+                    break;
+                //Logs user out and closes the application
+                case 4: 
+                    System.out.println("You Have Been Logged Out!");
+                    System.exit(0);
+                    rerun = false;
+                    break;
+            }
         }
 
         //Close Scanner Object
@@ -76,10 +82,10 @@ public class main {
     //Makes a reservation
     public static void makeReservation(Student student) {
         System.out.println("Please Select a Space by Entering its Letter");
-        File spaces = new File("Spaces.txt"); 
+        File spaces = new File("ParkingLotEconomy-/Spaces.txt"); 
         //Display all of the spaces
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("Spaces.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("ParkingLotEconomy-/Spaces.txt"));
             String line = reader.readLine();
             while (line != null) {
                 System.out.println(line);
