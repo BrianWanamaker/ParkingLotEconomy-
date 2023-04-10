@@ -30,17 +30,17 @@ public class Student {
         //Brian       
         if(ID.equals("123456"))
         {
-            file = new File("Brian.txt");
+            file = new File("ParkingLotEconomy-/Brian.txt");
         }
         //Aamnah     
         else if(ID.equals("567890"))
         {
-            file = new File("Aamnah.txt");
+            file = new File("ParkingLotEconomy-/Aamnah.txt");
         }
         //Phill     
         else if(ID.equals("654321"))
         {
-            file = new File("Phill.txt");
+            file = new File("ParkingLotEconomy-/Phill.txt");
         }
         else
         {
