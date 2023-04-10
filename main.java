@@ -134,6 +134,5 @@ public class main {
             Student.addReservation(space);
             Student.setMoney(funds-cost);
         } 
-        input.close();
     }
 }
